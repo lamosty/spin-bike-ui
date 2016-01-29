@@ -2,7 +2,9 @@
   "name": "spin-bike-ui",
   "version": "0.1.0",
   "description": "Measure trip (avg) speed, distance, total/working time and more in a nice and clear UI. All with React and Redux.",
-  "scripts": {},
+  "scripts": {
+    "start": "node src/server.js"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/lamosty/spin-bike-ui.git"
@@ -30,6 +32,7 @@
     "webpack-hot-middleware": "^2.6.4"
   },
   "dependencies": {
+    "express": "^4.13.4",
     "react": "^0.14.7",
     "react-dom": "^0.14.7",
     "react-redux": "^4.1.2",
