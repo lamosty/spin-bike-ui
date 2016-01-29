@@ -1,13 +1,14 @@
-const webpack = require('webpack');
-const webpackDevMiddleware = require('webpack-dev-middleware');
-const webpackHotMiddleware = require('webpack-hot-middleware');
-const express = require('express');
-const webpackConfig = require('../webpack.config');
+var webpack = require('webpack');
+var webpackDevMiddleware = require('webpack-dev-middleware');
+var webpackHotMiddleware = require('webpack-hot-middleware');
+var express = require('express');
+var webpackConfig = require('../webpack.config');
+var path = require('path');
 
-const PORT = 3000;
+var PORT = 3000;
 
-const app = new express();
-const compiler = webpack(webpackConfig);
+var app = new express();
+var compiler = webpack(webpackConfig);
 
 app.use(
 	webpackDevMiddleware(
@@ -20,8 +21,10 @@ app.use(
 
 app.use(webpackHotMiddleware(compiler));
 
+var pathToPublicFolder = path.join(__dirname, '../', webpackConfig.output.publicPath);
+
 app.use(function(req, res) {
-	res.sendFile(__dirname + '/index.html'); // try template tags
+	res.sendFile(pathToPublicFolder + '/index.html');
 });
 
 app.listen(PORT, function(error) {
