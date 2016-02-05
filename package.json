@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "description": "Measure trip (avg) speed, distance, total/working time and more in a nice and clear UI. All with React and Redux.",
   "scripts": {
-    "start": "node src/server.js"
+    "start": "node server"
   },
   "repository": {
     "type": "git",
