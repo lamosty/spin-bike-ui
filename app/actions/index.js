@@ -1,6 +1,7 @@
-import RpmMeter from 'spin-bike-rpm-meter';
+import RpmMeter, { PULSE_EVENT } from 'spin-bike-rpm-meter';
 
 export const START_LISTENING_TO_PULSES = 'START_LISTENING_TO_PULSES';
+export const GET_PULSE_DATA = 'GET_PULSE_DATA';
 
 export function startRpmMeter() {
 	return function(dispatch) {
@@ -8,11 +9,20 @@ export function startRpmMeter() {
 
 		return rpmMeter.start()
 			.then(stopFunction => {
-				console.log('Starting listening to pulses...'); // Refactor to standard logging routine.
-
 				dispatch(startListeningToPulses(rpmMeter, stopFunction));
+
+				rpmMeter.on(PULSE_EVENT, pulseData => {
+					dispatch(getPulseData(pulseData));
+				});
 			});
 	}
+}
+
+function getPulseData(pulseData) {
+	return {
+		type: GET_PULSE_DATA,
+		payload: pulseData
+	};
 }
 
 function startListeningToPulses(rpmMeter, stopFunction) {
