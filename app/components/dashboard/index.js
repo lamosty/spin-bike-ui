@@ -4,9 +4,11 @@ import NumberUnit from '../number-unit';
 
 export default class Dashboard extends Component {
 	renderMeters() {
+		const { speed } = this.props;
+
 		return (
 			<div>
-				<NumberUnit title="" number="25" unit="km/h" />
+				<NumberUnit title="" number={speed} unit="km/h" />
 				<NumberUnit title="average speed" number="20" unit="km/h" />
 				<NumberUnit title="total distance" number="15" unit="km" />
 			</div>
