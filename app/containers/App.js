@@ -1,16 +1,13 @@
-import React from 'react';
-import styles from './App.css';
+import React, { Component } from 'react';
 
-export default class App extends React.Component {
+export default class App extends Component {
 	constructor(props) {
 		super(props);
-		this.state = {test: 'foo'};
 	}
+
 	render() {
-		return (
-			<div className={styles.app}>
-		bar
-		</div>
-	);
+		const { children } = this.props;
+
+		return children;
 	}
 }
