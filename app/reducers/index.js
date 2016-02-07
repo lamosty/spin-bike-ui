@@ -9,9 +9,14 @@ function rpmMeter(state = {}, action) {
 			const { payload } = action;
 
 			return {
-				rpmMeter: payload.rpmMeter,
-				stopFunction: payload.stopFunction
+				stopFunction: payload.stopFunction,
+				isTripRunning: true
 			};
+
+		case ActionTypes.STOP_LISTENING_TO_PULSES:
+			return {
+				isTripRunning: false
+			}
 	}
 
 	return state;

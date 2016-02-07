@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-export default class NumberUnit {
+export default class NumberUnit extends Component {
 	render() {
 		const { title, number, unit } = this.props;
 
