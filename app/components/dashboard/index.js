@@ -4,12 +4,13 @@ import styles from './style.css';
 export default class Dashboard extends Component {
 	render() {
 
-		const { startRpmMeter } = this.props;
+		const { startRpmMeter, stopRpmMeter } = this.props;
 
 		return (
 			<div className={styles.dashboard}>
 				Dashboard
 				<button onClick={startRpmMeter}>start rpm meter</button>
+				<button onClick={stopRpmMeter}>stop rpm meter</button>
 			</div>
 		)
 	}

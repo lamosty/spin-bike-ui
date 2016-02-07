@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Dashboard from '../components/dashboard';
-import { startRpmMeter } from '../actions';
+import { startRpmMeter, stopRpmMeter } from '../actions';
 
 class DashboardContainer extends Component {
 	constructor(props) {
@@ -9,10 +9,10 @@ class DashboardContainer extends Component {
 	}
 
 	render() {
-		const { startRpmMeter } = this.props;
+		const { startRpmMeter, stopRpmMeter } = this.props;
 
 		return (
-			<Dashboard startRpmMeter={startRpmMeter} />
+			<Dashboard startRpmMeter={startRpmMeter} stopRpmMeter={stopRpmMeter} />
 		);
 	}
 }
@@ -24,6 +24,7 @@ function mapStateToProps(state) {
 export default connect(
 	mapStateToProps,
 	{
-		startRpmMeter
+		startRpmMeter,
+		stopRpmMeter
 	}
 )(DashboardContainer);

@@ -2,6 +2,7 @@ import RpmMeter, { PULSE_EVENT } from 'spin-bike-rpm-meter';
 
 export const START_LISTENING_TO_PULSES = 'START_LISTENING_TO_PULSES';
 export const GET_PULSE_DATA = 'GET_PULSE_DATA';
+export const STOP_LISTENING_TO_PULSES = 'STOP_LISTENING_TO_PULSES';
 
 export function startRpmMeter() {
 	return function(dispatch) {
@@ -33,4 +34,21 @@ function startListeningToPulses(rpmMeter, stopFunction) {
 			stopFunction
 		}
 	};
+}
+
+export function stopRpmMeter() {
+	return function(dispatch, getState) {
+		const state = getState();
+
+		const { stopFunction } = state.rpmMeter;
+
+		stopFunction();
+		dispatch(stopListeningToPulses());
+	}
+}
+
+function stopListeningToPulses() {
+	return {
+		type: STOP_LISTENING_TO_PULSES
+	}
 }
