@@ -24,17 +24,23 @@ function rpmMeter(state = {}, action) {
 	return state;
 }
 
+// TODO: refactor to separate file.
 function trip(state = {}, action) {
 	if (action.type != ActionTypes.GET_PULSE_DATA) {
 		return state;
 	}
 
-	const pulseData = action.payload;
+	// TODO: get this from user profile. Meanwhile, use @lamosty's bike.
+	const wheelDiameter = 6.6; //in meters
+
+	const { secondsBetweenPulses } = action.payload;
 
 	// TODO: append previous state, don't discard it.
 	const newState = {
-		speed: calculate.speed(pulseData)
+		speed: calculate.speed(wheelDiameter, secondsBetweenPulses)
 	};
+
+	window.numberQty = newState.speed;
 
 	return newState;
 }

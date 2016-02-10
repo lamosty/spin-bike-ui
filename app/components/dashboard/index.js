@@ -8,7 +8,7 @@ export default class Dashboard extends Component {
 
 		return (
 			<div>
-				<NumberUnit title="" number={speed} unit="km/h" />
+				<NumberUnit title="" numberQty={speed} />
 				<NumberUnit title="average speed" number="20" unit="km/h" />
 				<NumberUnit title="total distance" number="15" unit="km" />
 			</div>

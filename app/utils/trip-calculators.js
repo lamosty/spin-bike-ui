@@ -1,6 +1,12 @@
-export function speed(pulseData) {
-	const wheelDiameter = 6.6; //in meters
+import Qty from 'js-quantities';
 
-	return 3.6 * (wheelDiameter / pulseData.secondsBetweenPulses);
-	// TODO: find library for converting between m/s to km/s.
+// TODO: get this from user profile. Meanwhile, use @lamosty's bike.
+function toUserSpeedUnit(speedInMs) {
+	const speedQty = new Qty(speedInMs + 'm/s');
+
+	return speedQty.to('km/h').toPrec(0.01);
+}
+
+export function speed(distance, time) {
+	return toUserSpeedUnit(distance / time);
 }

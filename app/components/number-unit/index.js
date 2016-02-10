@@ -2,7 +2,16 @@ import React, { Component } from 'react';
 
 export default class NumberUnit extends Component {
 	render() {
-		const { title, number, unit } = this.props;
+		const { title, numberQty } = this.props;
+
+		let number = '';
+		let unit = '';
+
+		// TODO: use some "detectUndefined" lib.
+		if (typeof numberQty !== 'undefined') {
+			number = numberQty.scalar;
+			unit = numberQty.units();
+		}
 
 		return (
 			<div>
