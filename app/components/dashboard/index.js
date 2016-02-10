@@ -4,13 +4,14 @@ import NumberUnit from '../number-unit';
 
 export default class Dashboard extends Component {
 	renderMeters() {
-		const { speed } = this.props;
+		const { tripInfo } = this.props;
 
+		// TODO: add total time, cycling (moving) time
 		return (
 			<div>
-				<NumberUnit title="" numberQty={speed} />
-				<NumberUnit title="average speed" number="20" unit="km/h" />
-				<NumberUnit title="total distance" number="15" unit="km" />
+				<NumberUnit title="" numberQty={tripInfo.speed} />
+				<NumberUnit title="average speed" numberQty={tripInfo.avgSpeed} />
+				<NumberUnit title="total distance" numberQty={tripInfo.totalDistance} />
 			</div>
 		);
 	}

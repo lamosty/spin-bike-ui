@@ -7,7 +7,6 @@ export default class NumberUnit extends Component {
 		let number = '';
 		let unit = '';
 
-		// TODO: use some "detectUndefined" lib.
 		if (typeof numberQty !== 'undefined') {
 			number = numberQty.scalar;
 			unit = numberQty.units();

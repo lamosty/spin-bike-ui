@@ -36,11 +36,13 @@ function trip(state = {}, action) {
 	const { secondsBetweenPulses } = action.payload;
 
 	// TODO: append previous state, don't discard it.
-	const newState = {
-		speed: calculate.speed(wheelDiameter, secondsBetweenPulses)
+	let newState = {
+		speed: calculate.speed(wheelDiameter, secondsBetweenPulses),
+		totalTime: calculate.totalTime(state.totalTime, secondsBetweenPulses),
+		totalDistance: calculate.totalDistance(state.totalDistance, wheelDiameter)
 	};
 
-	window.numberQty = newState.speed;
+	newState.avgSpeed = calculate.avgSpeed(newState.totalDistance, newState.totalTime);
 
 	return newState;
 }
