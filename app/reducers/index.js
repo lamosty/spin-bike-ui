@@ -1,6 +1,7 @@
 import * as ActionTypes from '../actions';
 import { routeReducer } from 'react-router-redux';
 import { combineReducers } from 'redux';
+import * as calculate from '../utils/trip-calculators';
 
 
 function rpmMeter(state = {}, action) {
@@ -23,14 +24,6 @@ function rpmMeter(state = {}, action) {
 	return state;
 }
 
-// TODO: refactor to helper/lib folder/file.
-function calcSpeed(pulseData) {
-	const wheelDiameter = 6.6; //in meters
-
-	return 3.6 * (wheelDiameter / pulseData.secondsBetweenPulses);
-	// TODO: find library for converting between m/s to km/s.
-}
-
 function trip(state = {}, action) {
 	if (action.type != ActionTypes.GET_PULSE_DATA) {
 		return state;
@@ -40,7 +33,7 @@ function trip(state = {}, action) {
 
 	// TODO: append previous state, don't discard it.
 	const newState = {
-		speed: calcSpeed(pulseData)
+		speed: calculate.speed(pulseData)
 	};
 
 	return newState;
