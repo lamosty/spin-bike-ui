@@ -31,7 +31,7 @@ function calcSpeed(pulseData) {
 	// TODO: find library for converting between m/s to km/s.
 }
 
-function tachoMeters(state = {}, action) {
+function trip(state = {}, action) {
 	if (action.type != ActionTypes.GET_PULSE_DATA) {
 		return state;
 	}
@@ -48,7 +48,7 @@ function tachoMeters(state = {}, action) {
 
 const rootReducer = combineReducers({
 	rpmMeter,
-	tachoMeters,
+	trip,
 	routing: routeReducer
 });
 

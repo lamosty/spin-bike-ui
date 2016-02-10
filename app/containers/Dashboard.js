@@ -23,7 +23,7 @@ class DashboardContainer extends Component {
 function mapStateToProps(state) {
 	return {
 		isTripRunning: state.rpmMeter.isTripRunning,
-		speed: state.tachoMeters.speed
+		speed: state.trip.speed
 	};
 }
 
