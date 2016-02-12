@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import Numeral from 'numeral';
 
 export default class NumberUnit extends Component {
 	renderQuantity(quantity, format) {
@@ -8,12 +9,13 @@ export default class NumberUnit extends Component {
 			);
 		}
 
-		// TODO: Use moment.js for formatting times.
 		if (quantity.kind() === 'time') {
 			quantity = quantity.to('s');
+			
+			let seconds = quantity.scalar;
 
 			return (
-				<span>to be done</span>
+				<span>{Numeral(seconds).format('00:00:00')}</span>
 			);
 		}
 
