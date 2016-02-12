@@ -6,12 +6,14 @@ export default class Dashboard extends Component {
 	renderMeters() {
 		const { tripInfo } = this.props;
 
-		// TODO: add total time, cycling (moving) time
+		// TODO: format totalTime to h:min:s
+		// TODO: make sure speed/avgSpeed is calculated properly
 		return (
 			<div>
 				<NumberUnit title="" quantity={tripInfo.speedQty} />
 				<NumberUnit title="average speed" quantity={tripInfo.avgSpeedQty} />
 				<NumberUnit title="total distance" quantity={tripInfo.totalDistanceQty} />
+				<NumberUnit title="total time" quantity={tripInfo.totalTimeQty} />
 			</div>
 		);
 	}

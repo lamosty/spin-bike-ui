@@ -17,7 +17,7 @@ export function trip(state = {}, action) {
 		totalDistanceQty: calculate.totalDistance(wheelDiameter, state.totalDistanceQty)
 	};
 
-	newState.avgSpeed = calculate.avgSpeed(newState.totalDistanceQty, newState.totalTimeQty);
+	newState.avgSpeedQty = calculate.avgSpeed(newState.totalDistanceQty, newState.totalTimeQty);
 
 	return newState;
 }
