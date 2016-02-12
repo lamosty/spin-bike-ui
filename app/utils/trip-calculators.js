@@ -15,21 +15,18 @@ function toUserTimeUnit(timeQty) {
 	return timeQty.to('h');
 }
 
-export function totalTime(prevTotalTime = new Qty('0s'), timeInS) {
-	return toUserTimeUnit(prevTotalTime.add(new Qty(timeInS + 's')));
+export function totalTime(prevTotalTimeQty = new Qty('0s'), timeInS) {
+	return toUserTimeUnit(prevTotalTimeQty.add(new Qty(timeInS + 's')));
 }
 
 function toUserDistanceUnit(distanceQty) {
 	return distanceQty.to('km').toPrec(0.01);
 }
 
-export function totalDistance(prevTotalDistance = new Qty('0m'), distanceInM) {
-	return toUserDistanceUnit(prevTotalDistance.add(new Qty(distanceInM + 'm')));
+export function totalDistance(prevTotalDistanceQty = new Qty('0m'), distanceInM) {
+	return toUserDistanceUnit(prevTotalDistanceQty.add(new Qty(distanceInM + 'm')));
 }
 
-// TODO: fix this computation.
 export function avgSpeed(distanceQty, timeQty) {
-	console.log(distanceQty.div(timeQty).toString());
 	return toUserSpeedUnit(distanceQty.div(timeQty));
-
 }

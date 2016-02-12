@@ -9,9 +9,9 @@ export default class Dashboard extends Component {
 		// TODO: add total time, cycling (moving) time
 		return (
 			<div>
-				<NumberUnit title="" numberQty={tripInfo.speed} />
-				<NumberUnit title="average speed" numberQty={tripInfo.avgSpeed} />
-				<NumberUnit title="total distance" numberQty={tripInfo.totalDistance} />
+				<NumberUnit title="" quantity={tripInfo.speedQty} />
+				<NumberUnit title="average speed" quantity={tripInfo.avgSpeedQty} />
+				<NumberUnit title="total distance" quantity={tripInfo.totalDistanceQty} />
 			</div>
 		);
 	}
