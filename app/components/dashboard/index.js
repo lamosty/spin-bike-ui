@@ -6,13 +6,30 @@ export default class Dashboard extends Component {
 	renderMeters() {
 		const { tripInfo, user } = this.props;
 
-		// TODO: add formatting option
+		const userFormat = user.dashboardFormat;
+
 		return (
 			<div>
-				<NumberUnit title="speed" quantity={tripInfo.speedQty} />
-				<NumberUnit title="average speed" quantity={tripInfo.avgSpeedQty} />
-				<NumberUnit title="total distance" quantity={tripInfo.totalDistanceQty} />
-				<NumberUnit title="total time" quantity={tripInfo.totalTimeQty} />
+				<NumberUnit
+					title="speed"
+					quantity={tripInfo.speedQty}
+					format={userFormat.speed}
+				/>
+				<NumberUnit
+					title="average speed"
+					quantity={tripInfo.avgSpeedQty}
+					format={userFormat.avgSpeed}
+				/>
+				<NumberUnit
+					title="total distance"
+					quantity={tripInfo.totalDistanceQty}
+				    format={userFormat.distance}
+				/>
+				<NumberUnit
+					title="total time"
+					quantity={tripInfo.totalTimeQty}
+				    format={userFormat.time}
+				/>
 			</div>
 		);
 	}
