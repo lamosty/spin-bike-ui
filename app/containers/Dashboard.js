@@ -9,12 +9,12 @@ class DashboardContainer extends Component {
 	}
 
 	render() {
-		const { startRpmMeter, stopRpmMeter, isTripRunning, tripInfo } = this.props;
+		const { startRpmMeter, stopRpmMeter, isTripRunning, tripInfo, user } = this.props;
 
 		// TODO: use object spread operator for this.props.
 		return (
 			<Dashboard startRpmMeter={startRpmMeter} stopRpmMeter={stopRpmMeter} isTripRunning={isTripRunning}
-			           tripInfo={tripInfo}
+			           tripInfo={tripInfo} user={user}
 			/>
 		);
 	}
@@ -23,7 +23,8 @@ class DashboardContainer extends Component {
 function mapStateToProps(state) {
 	return {
 		isTripRunning: state.rpmMeter.isTripRunning,
-		tripInfo: state.trip
+		tripInfo: state.trip,
+		user: state.user
 	};
 }
 

@@ -4,9 +4,9 @@ import NumberUnit from '../number-unit';
 
 export default class Dashboard extends Component {
 	renderMeters() {
-		const { tripInfo } = this.props;
+		const { tripInfo, user } = this.props;
 
-		// TODO: format totalTime to h:min:s
+		// TODO: add formatting option
 		return (
 			<div>
 				<NumberUnit title="speed" quantity={tripInfo.speedQty} />
