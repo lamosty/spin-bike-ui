@@ -38,8 +38,8 @@ function trip(state = {}, action) {
 	// TODO: append previous state, don't discard it.
 	let newState = {
 		speedQty: calculate.speed(wheelDiameter, secondsBetweenPulses),
-		totalTimeQty: calculate.totalTime(state.totalTimeQty, secondsBetweenPulses),
-		totalDistanceQty: calculate.totalDistance(state.totalDistanceQty, wheelDiameter)
+		totalTimeQty: calculate.totalTime(secondsBetweenPulses, state.totalTimeQty),
+		totalDistanceQty: calculate.totalDistance(wheelDiameter, state.totalDistanceQty)
 	};
 
 	newState.avgSpeed = calculate.avgSpeed(newState.totalDistanceQty, newState.totalTimeQty);

@@ -15,16 +15,16 @@ function toUserTimeUnit(timeQty) {
 	return timeQty.to('h');
 }
 
-export function totalTime(prevTotalTimeQty = new Qty('0s'), timeInS) {
-	return toUserTimeUnit(prevTotalTimeQty.add(new Qty(timeInS + 's')));
+export function totalTime(newTimeInS, prevTotalTimeQty = new Qty('0s')) {
+	return toUserTimeUnit(prevTotalTimeQty.add(new Qty(newTimeInS + 's')));
 }
 
 function toUserDistanceUnit(distanceQty) {
 	return distanceQty.to('km').toPrec(0.01);
 }
 
-export function totalDistance(prevTotalDistanceQty = new Qty('0m'), distanceInM) {
-	return toUserDistanceUnit(prevTotalDistanceQty.add(new Qty(distanceInM + 'm')));
+export function totalDistance(newDistanceInM, prevTotalDistanceQty = new Qty('0m')) {
+	return toUserDistanceUnit(prevTotalDistanceQty.add(new Qty(newDistanceInM + 'm')));
 }
 
 export function avgSpeed(distanceQty, timeQty) {
