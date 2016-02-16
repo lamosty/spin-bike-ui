@@ -27,10 +27,15 @@ export default class Dashboard extends Component {
 				    format={userFormat.distance}
 				/>
 				<TimeInterval
-					title="total time"
-					quantity={tripInfo.totalTimeQty}
+					title="moving time"
+					quantity={tripInfo.movingTimeQty}
 				    format={userFormat.time}
 				/>
+				<TimeInterval
+					title="total time"
+					quantity={tripInfo.totalTimeQty}
+					format={userFormat.time}
+					/>
 			</div>
 		);
 	}

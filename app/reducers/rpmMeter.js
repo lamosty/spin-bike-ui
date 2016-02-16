@@ -7,6 +7,7 @@ export function rpmMeter(state = {}, action) {
 
 			return {
 				stopFunction: payload.stopFunction,
+				tripClock: payload.tripClock,
 				isTripRunning: true
 			};
 

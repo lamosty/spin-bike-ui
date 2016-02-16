@@ -1,8 +1,10 @@
 import RpmMeter, { PULSE_EVENT } from 'spin-bike-rpm-meter';
+import { startTripClock } from '../utils/action-helpers';
 
 export const START_LISTENING_TO_PULSES = 'START_LISTENING_TO_PULSES';
 export const GET_PULSE_DATA = 'GET_PULSE_DATA';
 export const STOP_LISTENING_TO_PULSES = 'STOP_LISTENING_TO_PULSES';
+export const ON_TRIP_CLOCK_TICK = 'ON_TRIP_CLOCK_TICK';
 
 export function startRpmMeter() {
 	return function(dispatch) {
@@ -10,12 +12,22 @@ export function startRpmMeter() {
 
 		return rpmMeter.start()
 			.then(stopFunction => {
-				dispatch(startListeningToPulses(rpmMeter, stopFunction));
+				const tripClock = startTripClock(() => {
+					dispatch(onTripClockTick());
+				});
+
+				dispatch(startListeningToPulses(rpmMeter, stopFunction, tripClock));
 
 				rpmMeter.on(PULSE_EVENT, pulseData => {
 					dispatch(getPulseData(pulseData));
 				});
 			});
+	}
+}
+
+function onTripClockTick() {
+	return {
+		type: ON_TRIP_CLOCK_TICK
 	}
 }
 
@@ -26,12 +38,13 @@ function getPulseData(pulseData) {
 	};
 }
 
-function startListeningToPulses(rpmMeter, stopFunction) {
+function startListeningToPulses(rpmMeter, stopFunction, tripClock) {
 	return {
 		type: START_LISTENING_TO_PULSES,
 		payload: {
 			rpmMeter,
-			stopFunction
+			stopFunction,
+			tripClock
 		}
 	};
 }
@@ -40,9 +53,10 @@ export function stopRpmMeter() {
 	return function(dispatch, getState) {
 		const state = getState();
 
-		const { stopFunction } = state.rpmMeter;
+		const { stopFunction, tripClock } = state.rpmMeter;
 
 		stopFunction();
+		tripClock.stop();
 		dispatch(stopListeningToPulses());
 	}
 }
