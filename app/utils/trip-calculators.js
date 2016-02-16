@@ -12,8 +12,8 @@ export function totalTime(prevTotalTimeQty = new Qty('0s')) {
 	return prevTotalTimeQty.add(new Qty('1s'));
 }
 
-export function totalDistance(newDistanceInM, prevTotalDistanceQty = new Qty('0m')) {
-	return prevTotalDistanceQty.add(new Qty(newDistanceInM + 'm'));
+export function distance(newDistanceInM, prevDistanceQty = new Qty('0m')) {
+	return prevDistanceQty.add(new Qty(newDistanceInM + 'm'));
 }
 
 export function avgSpeed(distanceQty, timeQty) {

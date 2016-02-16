@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import Dashboard from '../components/dashboard';
+import TripDashboard from '../components/trip-dashboard';
 import { startRpmMeter, stopRpmMeter } from '../actions';
 
-class DashboardContainer extends Component {
+class TripDashboardContainer extends Component {
 	constructor(props) {
 		super(props);
 	}
@@ -13,7 +13,7 @@ class DashboardContainer extends Component {
 
 		// TODO: use object spread operator for this.props.
 		return (
-			<Dashboard startRpmMeter={startRpmMeter} stopRpmMeter={stopRpmMeter} isTripRunning={isTripRunning}
+			<TripDashboard startRpmMeter={startRpmMeter} stopRpmMeter={stopRpmMeter} isTripRunning={isTripRunning}
 			           tripInfo={tripInfo} user={user}
 			/>
 		);
@@ -34,4 +34,4 @@ export default connect(
 		startRpmMeter,
 		stopRpmMeter
 	}
-)(DashboardContainer);
+)(TripDashboardContainer);

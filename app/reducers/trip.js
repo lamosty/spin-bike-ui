@@ -13,10 +13,10 @@ export function trip(state = {}, action) {
 			let newState = {
 				speedQty: calculate.speed(wheelDiameter, secondsBetweenPulses),
 				movingTimeQty: calculate.movingTime(secondsBetweenPulses, state.movingTimeQty),
-				totalDistanceQty: calculate.totalDistance(wheelDiameter, state.totalDistanceQty)
+				distanceQty: calculate.distance(wheelDiameter, state.distanceQty)
 			};
 
-			newState.avgSpeedQty = calculate.avgSpeed(newState.totalDistanceQty, newState.movingTimeQty);
+			newState.avgSpeedQty = calculate.avgSpeed(newState.distanceQty, newState.movingTimeQty);
 
 			return merge({}, state, newState);
 

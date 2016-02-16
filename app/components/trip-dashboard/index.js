@@ -3,7 +3,7 @@ import styles from './style.css';
 import NumberUnit from '../number-unit';
 import TimeInterval from '../time-interval';
 
-export default class Dashboard extends Component {
+export default class TripDashboard extends Component {
 	renderMeters() {
 		const { tripInfo, user } = this.props;
 
@@ -22,8 +22,8 @@ export default class Dashboard extends Component {
 					format={userFormat.avgSpeed}
 				/>
 				<NumberUnit
-					title="total distance"
-					quantity={tripInfo.totalDistanceQty}
+					title="distance"
+					quantity={tripInfo.distanceQty}
 				    format={userFormat.distance}
 				/>
 				<TimeInterval
@@ -46,7 +46,7 @@ export default class Dashboard extends Component {
 
 		return (
 			<div className={styles.dashboard}>
-				Dashboard
+				TripDashboard
 				<button onClick={startRpmMeter}>start rpm meter</button>
 				<button onClick={stopRpmMeter}>stop rpm meter</button>
 				{isTripRunning ? this.renderMeters() : null}
