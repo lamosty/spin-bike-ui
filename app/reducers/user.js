@@ -11,7 +11,7 @@ export function user(state = {}, action) {
 					speed: 'km/h',
 					avgSpeed: 'km/h',
 					distance: 'km',
-					time: 'h:min:s'
+					time: '00:00:00'
 				}
 			}
 	}

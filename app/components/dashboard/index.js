@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import styles from './style.css';
 import NumberUnit from '../number-unit';
+import TimeInterval from '../time-interval';
 
 export default class Dashboard extends Component {
 	renderMeters() {
@@ -25,7 +26,7 @@ export default class Dashboard extends Component {
 					quantity={tripInfo.totalDistanceQty}
 				    format={userFormat.distance}
 				/>
-				<NumberUnit
+				<TimeInterval
 					title="total time"
 					quantity={tripInfo.totalTimeQty}
 				    format={userFormat.time}

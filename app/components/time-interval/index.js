@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
+import Numeral from 'numeral';
 
-export default class NumberUnit extends Component {
+export default class TimeInterval extends Component {
 	renderQuantity(quantity, format) {
 		if (typeof quantity === 'undefined') {
 			return (
@@ -8,12 +9,9 @@ export default class NumberUnit extends Component {
 			);
 		}
 
-		const formattedQuantity = quantity.to(format).toPrec(0.01);
+		const seconds = quantity.to('s').scalar;
 
-		return [
-			<span key="value">{formattedQuantity.scalar}</span>,
-			<span key="unit">{formattedQuantity.units()}</span>
-		];
+		return <span>{Numeral(seconds).format(format)}</span>;
 	}
 
 	render() {
