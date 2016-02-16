@@ -42,7 +42,7 @@ export default class TripDashboard extends Component {
 
 	render() {
 
-		const { startRpmMeter, stopRpmMeter, isTripRunning } = this.props;
+		const { startRpmMeter, stopRpmMeter, isTripRunning, tripInfo } = this.props;
 
 		return (
 			<div className={styles.dashboard}>
@@ -50,6 +50,7 @@ export default class TripDashboard extends Component {
 				<button onClick={startRpmMeter}>start rpm meter</button>
 				<button onClick={stopRpmMeter}>stop rpm meter</button>
 				{isTripRunning ? this.renderMeters() : null}
+				{tripInfo.isMoving ? 'moving' : 'not moving'}
 			</div>
 		)
 	}

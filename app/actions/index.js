@@ -5,9 +5,10 @@ export const START_LISTENING_TO_PULSES = 'START_LISTENING_TO_PULSES';
 export const GET_PULSE_DATA = 'GET_PULSE_DATA';
 export const STOP_LISTENING_TO_PULSES = 'STOP_LISTENING_TO_PULSES';
 export const ON_TRIP_CLOCK_TICK = 'ON_TRIP_CLOCK_TICK';
+export const STOPPED_MOVING = 'STOPPED_MOVING';
 
 export function startRpmMeter() {
-	return function(dispatch) {
+	return function(dispatch, getState) {
 		const rpmMeter = new RpmMeter();
 
 		return rpmMeter.start()
@@ -19,9 +20,29 @@ export function startRpmMeter() {
 				dispatch(startListeningToPulses(rpmMeter, stopFunction, tripClock));
 
 				rpmMeter.on(PULSE_EVENT, pulseData => {
-					dispatch(getPulseData(pulseData));
+					const state = getState();
+
+					let { movingThresholdTimeout } = state.trip;
+
+					clearTimeout(movingThresholdTimeout);
+
+					movingThresholdTimeout = setTimeout(() => {
+						dispatch(stoppedMoving());
+
+					}, 2000);
+
+					dispatch(getPulseData(pulseData, movingThresholdTimeout));
 				});
 			});
+	}
+}
+
+function stoppedMoving() {
+	return {
+		type: STOPPED_MOVING,
+		payload: {
+			isMoving: false
+		}
 	}
 }
 
@@ -31,10 +52,13 @@ function onTripClockTick() {
 	}
 }
 
-function getPulseData(pulseData) {
+function getPulseData(pulseData, movingThresholdTimeout) {
 	return {
 		type: GET_PULSE_DATA,
-		payload: pulseData
+		payload: {
+			pulseData,
+			movingThresholdTimeout
+		}
 	};
 }
 

@@ -8,7 +8,15 @@ export function trip(state = {}, action) {
 			// TODO: get this from user profile. Meanwhile, use @lamosty's bike.
 			const wheelDiameter = 6.6; //in meters
 
-			const { secondsBetweenPulses } = action.payload;
+			let { secondsBetweenPulses } = action.payload.pulseData;
+			const { isMoving } = state;
+
+			if (!isMoving) {
+				return merge({}, {
+					isMoving: true,
+					movingThresholdTimeout: action.payload.movingThresholdTimeout
+				});
+			}
 
 			let newState = {
 				speedQty: calculate.speed(wheelDiameter, secondsBetweenPulses),
@@ -18,11 +26,24 @@ export function trip(state = {}, action) {
 
 			newState.avgSpeedQty = calculate.avgSpeed(newState.distanceQty, newState.movingTimeQty);
 
-			return merge({}, state, newState);
+			return merge({}, state, newState, {
+				isMoving: true,
+				movingThresholdTimeout: action.payload.movingThresholdTimeout
+			});
 
 		case ActionTypes.ON_TRIP_CLOCK_TICK:
 			return merge({}, state, {
 				totalTimeQty: calculate.totalTime(state.totalTimeQty)
+			});
+
+		case ActionTypes.START_LISTENING_TO_PULSES:
+			return merge({}, state, {
+				isMoving: false
+			});
+
+		case ActionTypes.STOPPED_MOVING:
+			return merge({}, state, {
+				isMoving: false
 			});
 	}
 
