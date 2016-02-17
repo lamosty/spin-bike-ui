@@ -1,6 +1,7 @@
 import * as ActionTypes from '../actions';
 import * as calculate from '../utils/trip-calculators';
 import merge from 'lodash.merge';
+import Qty from 'js-quantities';
 
 export function trip(state = {}, action) {
 	switch(action.type) {
@@ -9,24 +10,24 @@ export function trip(state = {}, action) {
 			const wheelDiameter = 6.6; //in meters
 
 			let { secondsBetweenPulses } = action.payload.pulseData;
-			const { isMoving } = state;
 
-			if (!isMoving) {
-				return merge({}, {
+			if (!state.isMoving) {
+				return merge({}, state, {
+					speedQty: new Qty('0km/h'),
 					isMoving: true,
 					movingThresholdTimeout: action.payload.movingThresholdTimeout
 				});
 			}
 
-			let newState = {
+			let tripNumbers = {
 				speedQty: calculate.speed(wheelDiameter, secondsBetweenPulses),
 				movingTimeQty: calculate.movingTime(secondsBetweenPulses, state.movingTimeQty),
 				distanceQty: calculate.distance(wheelDiameter, state.distanceQty)
 			};
 
-			newState.avgSpeedQty = calculate.avgSpeed(newState.distanceQty, newState.movingTimeQty);
+			tripNumbers.avgSpeedQty = calculate.avgSpeed(tripNumbers.distanceQty, tripNumbers.movingTimeQty);
 
-			return merge({}, state, newState, {
+			return merge({}, state, tripNumbers, {
 				isMoving: true,
 				movingThresholdTimeout: action.payload.movingThresholdTimeout
 			});
@@ -43,7 +44,8 @@ export function trip(state = {}, action) {
 
 		case ActionTypes.STOPPED_MOVING:
 			return merge({}, state, {
-				isMoving: false
+				isMoving: false,
+				speedQty: new Qty('0km/h')
 			});
 	}
 
