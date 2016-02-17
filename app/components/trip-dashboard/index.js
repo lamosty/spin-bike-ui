@@ -2,12 +2,14 @@ import React, { Component } from 'react';
 import styles from './style.css';
 import NumberUnit from '../number-unit';
 import TimeInterval from '../time-interval';
+import ResistanceInput from '../resistance-input';
 
 export default class TripDashboard extends Component {
 	renderMeters() {
 		const { tripData, user } = this.props;
 
 		const userFormat = user.dashboardFormat;
+		const resistanceLevels = user.resistanceLevels;
 
 		return (
 			<div>
@@ -36,6 +38,8 @@ export default class TripDashboard extends Component {
 					quantity={tripData.totalTimeQty}
 					format={userFormat.time}
 					/>
+
+				<ResistanceInput levels={resistanceLevels} />
 			</div>
 		);
 	}

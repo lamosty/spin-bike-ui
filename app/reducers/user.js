@@ -12,7 +12,12 @@ export function user(state = {}, action) {
 					avgSpeed: 'km/h',
 					distance: 'km',
 					time: '00:00:00'
-				}
+				},
+				resistanceLevels: [
+					{id: 1, title: '1'},
+					{id: 2, title: '2'},
+					{id: 3, title: '3'}
+				]
 			}
 	}
 
