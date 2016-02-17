@@ -5,7 +5,7 @@ import TimeInterval from '../time-interval';
 
 export default class TripDashboard extends Component {
 	renderMeters() {
-		const { tripInfo, user } = this.props;
+		const { tripData, user } = this.props;
 
 		const userFormat = user.dashboardFormat;
 
@@ -13,27 +13,27 @@ export default class TripDashboard extends Component {
 			<div>
 				<NumberUnit
 					title="speed"
-					quantity={tripInfo.speedQty}
+					quantity={tripData.speedQty}
 					format={userFormat.speed}
 				/>
 				<NumberUnit
 					title="average speed"
-					quantity={tripInfo.avgSpeedQty}
+					quantity={tripData.avgSpeedQty}
 					format={userFormat.avgSpeed}
 				/>
 				<NumberUnit
 					title="distance"
-					quantity={tripInfo.distanceQty}
+					quantity={tripData.distanceQty}
 				    format={userFormat.distance}
 				/>
 				<TimeInterval
 					title="moving time"
-					quantity={tripInfo.movingTimeQty}
+					quantity={tripData.movingTimeQty}
 				    format={userFormat.time}
 				/>
 				<TimeInterval
 					title="total time"
-					quantity={tripInfo.totalTimeQty}
+					quantity={tripData.totalTimeQty}
 					format={userFormat.time}
 					/>
 			</div>
@@ -42,7 +42,7 @@ export default class TripDashboard extends Component {
 
 	render() {
 
-		const { startTrip, stopTrip, isTripRunning, tripInfo } = this.props;
+		const { startTrip, stopTrip, isTripRunning, tripData } = this.props;
 
 		return (
 			<div className={styles.dashboard}>
@@ -50,7 +50,7 @@ export default class TripDashboard extends Component {
 				<button onClick={startTrip}>Start Trip</button>
 				<button onClick={stopTrip}>Stop Trip</button>
 				{isTripRunning ? this.renderMeters() : null}
-				{tripInfo.isMoving ? 'moving' : 'not moving'}
+				{tripData.isMoving ? 'moving' : 'not moving'}
 			</div>
 		)
 	}

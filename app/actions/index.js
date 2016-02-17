@@ -22,7 +22,7 @@ export function startTrip() {
 				rpmMeter.on(PULSE_EVENT, pulseData => {
 					const state = getState();
 
-					let { movingThresholdTimeout } = state.trip;
+					let { movingThresholdTimeout } = state.tripDashboard;
 
 					clearTimeout(movingThresholdTimeout);
 

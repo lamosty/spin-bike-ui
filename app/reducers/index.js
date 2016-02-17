@@ -1,12 +1,12 @@
 import { routeReducer } from 'react-router-redux';
 import { combineReducers } from 'redux';
-import { trip } from './trip';
+import { tripDashboard } from './tripDashboard';
 import { rpmMeter } from './rpmMeter';
 import { user } from './user';
 
 const rootReducer = combineReducers({
 	rpmMeter,
-	trip,
+	tripDashboard,
 	user,
 	routing: routeReducer
 });

@@ -9,21 +9,14 @@ class TripDashboardContainer extends Component {
 	}
 
 	render() {
-		const { startTrip, stopTrip, isTripRunning, tripInfo, user } = this.props;
-
-		// TODO: use object spread operator for this.props.
-		return (
-			<TripDashboard startTrip={startTrip} stopTrip={stopTrip} isTripRunning={isTripRunning}
-			           tripInfo={tripInfo} user={user}
-			/>
-		);
+		return <TripDashboard {...this.props} />;
 	}
 }
 
 function mapStateToProps(state) {
 	return {
 		isTripRunning: state.rpmMeter.isTripRunning,
-		tripInfo: state.trip,
+		tripData: state.tripDashboard,
 		user: state.user
 	};
 }

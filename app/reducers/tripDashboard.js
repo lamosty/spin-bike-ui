@@ -3,7 +3,7 @@ import * as calculate from '../utils/trip-calculators';
 import merge from 'lodash.merge';
 import Qty from 'js-quantities';
 
-export function trip(state = {}, action) {
+export function tripDashboard(state = {}, action) {
 	switch(action.type) {
 		case actionTypes.GET_TRIP_DATA:
 			if (!state.isMoving) {
