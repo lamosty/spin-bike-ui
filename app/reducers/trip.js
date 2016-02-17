@@ -5,7 +5,7 @@ import Qty from 'js-quantities';
 
 export function trip(state = {}, action) {
 	switch(action.type) {
-		case actionTypes.GET_PULSE_DATA:
+		case actionTypes.GET_TRIP_DATA:
 			if (!state.isMoving) {
 				return merge({}, state, {
 					speedQty: new Qty('0km/h'),
@@ -32,17 +32,17 @@ export function trip(state = {}, action) {
 				movingThresholdTimeout: action.payload.movingThresholdTimeout
 			});
 
-		case actionTypes.ON_TRIP_CLOCK_TICK:
+		case actionTypes.TICK_TRIP_CLOCK:
 			return merge({}, state, {
 				totalTimeQty: calculate.totalTime(state.totalTimeQty)
 			});
 
-		case actionTypes.START_LISTENING_TO_PULSES:
+		case actionTypes.START_TRIP:
 			return merge({}, state, {
 				isMoving: false
 			});
 
-		case actionTypes.STOPPED_MOVING:
+		case actionTypes.STOP_MOVING:
 			return merge({}, state, {
 				isMoving: false,
 				speedQty: new Qty('0km/h')

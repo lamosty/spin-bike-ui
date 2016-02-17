@@ -4,7 +4,7 @@ export function user(state = {}, action) {
 
 	// TODO: add a real user auth
 	switch(action.type) {
-		case actionTypes.START_LISTENING_TO_PULSES:
+		case actionTypes.START_TRIP:
 			return {
 				id: 1,
 				dashboardFormat: {

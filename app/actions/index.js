@@ -1,23 +1,23 @@
 import RpmMeter, { PULSE_EVENT } from 'spin-bike-rpm-meter';
 import { startTripClock } from '../utils/action-helpers';
 
-export const START_LISTENING_TO_PULSES = 'START_LISTENING_TO_PULSES';
-export const GET_PULSE_DATA = 'GET_PULSE_DATA';
-export const STOP_LISTENING_TO_PULSES = 'STOP_LISTENING_TO_PULSES';
-export const ON_TRIP_CLOCK_TICK = 'ON_TRIP_CLOCK_TICK';
-export const STOPPED_MOVING = 'STOPPED_MOVING';
+export const START_TRIP = 'START_TRIP';
+export const STOP_TRIP = 'STOP_TRIP';
+export const GET_TRIP_DATA = 'GET_TRIP_DATA';
+export const TICK_TRIP_CLOCK = 'TICK_TRIP_CLOCK';
+export const STOP_MOVING = 'STOP_MOVING';
 
-export function startRpmMeter() {
+export function startTrip() {
 	return function(dispatch, getState) {
 		const rpmMeter = new RpmMeter();
 
 		return rpmMeter.start()
 			.then(stopFunction => {
 				const tripClock = startTripClock(() => {
-					dispatch(onTripClockTick());
+					dispatch(tickTripClockAction());
 				});
 
-				dispatch(startListeningToPulses(rpmMeter, stopFunction, tripClock));
+				dispatch(startTripAction(rpmMeter, stopFunction, tripClock));
 
 				rpmMeter.on(PULSE_EVENT, pulseData => {
 					const state = getState();
@@ -27,34 +27,46 @@ export function startRpmMeter() {
 					clearTimeout(movingThresholdTimeout);
 
 					movingThresholdTimeout = setTimeout(() => {
-						dispatch(stoppedMoving());
+						dispatch(stopMovingAction());
 
 					}, 2000);
 
-					dispatch(getPulseData(pulseData, movingThresholdTimeout));
+					dispatch(getTripDataAction(pulseData, movingThresholdTimeout));
 				});
 			});
 	}
 }
 
-function stoppedMoving() {
+export function stopTrip() {
+	return function(dispatch, getState) {
+		const state = getState();
+
+		const { stopFunction, tripClock } = state.rpmMeter;
+
+		stopFunction();
+		tripClock.stop();
+		dispatch(stopTripAction());
+	}
+}
+
+function stopMovingAction() {
 	return {
-		type: STOPPED_MOVING,
+		type: STOP_MOVING,
 		payload: {
 			isMoving: false
 		}
 	}
 }
 
-function onTripClockTick() {
+function tickTripClockAction() {
 	return {
-		type: ON_TRIP_CLOCK_TICK
+		type: TICK_TRIP_CLOCK
 	}
 }
 
-function getPulseData(pulseData, movingThresholdTimeout) {
+function getTripDataAction(pulseData, movingThresholdTimeout) {
 	return {
-		type: GET_PULSE_DATA,
+		type: GET_TRIP_DATA,
 		payload: {
 			pulseData,
 			movingThresholdTimeout
@@ -62,9 +74,9 @@ function getPulseData(pulseData, movingThresholdTimeout) {
 	};
 }
 
-function startListeningToPulses(rpmMeter, stopFunction, tripClock) {
+function startTripAction(rpmMeter, stopFunction, tripClock) {
 	return {
-		type: START_LISTENING_TO_PULSES,
+		type: START_TRIP,
 		payload: {
 			rpmMeter,
 			stopFunction,
@@ -73,20 +85,8 @@ function startListeningToPulses(rpmMeter, stopFunction, tripClock) {
 	};
 }
 
-export function stopRpmMeter() {
-	return function(dispatch, getState) {
-		const state = getState();
-
-		const { stopFunction, tripClock } = state.rpmMeter;
-
-		stopFunction();
-		tripClock.stop();
-		dispatch(stopListeningToPulses());
-	}
-}
-
-function stopListeningToPulses() {
+function stopTripAction() {
 	return {
-		type: STOP_LISTENING_TO_PULSES
+		type: STOP_TRIP
 	}
 }

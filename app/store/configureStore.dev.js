@@ -13,7 +13,7 @@ const reduxLoggerOptions = {
 	predicate(getState, action) {
 		// Exclude these actions from being logged.
 		const actionBlacklist = [
-			actionTypes.ON_TRIP_CLOCK_TICK
+			actionTypes.TICK_TRIP_CLOCK
 		];
 
 		for (let actionType of actionBlacklist) {

@@ -2,7 +2,7 @@ import * as actionTypes from '../actions';
 
 export function rpmMeter(state = {}, action) {
 	switch(action.type) {
-		case actionTypes.START_LISTENING_TO_PULSES:
+		case actionTypes.START_TRIP:
 			const { payload } = action;
 
 			return {
@@ -11,7 +11,7 @@ export function rpmMeter(state = {}, action) {
 				isTripRunning: true
 			};
 
-		case actionTypes.STOP_LISTENING_TO_PULSES:
+		case actionTypes.STOP_TRIP:
 			return {
 				isTripRunning: false
 			}
