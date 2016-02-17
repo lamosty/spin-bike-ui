@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import TripDashboard from '../components/trip-dashboard';
 import { startTrip, stopTrip, changeResistanceLevel } from '../actions';
+import { getCurrentTrip } from '../utils/reducers-helpers';
 
 class TripDashboardContainer extends Component {
 	constructor(props) {
@@ -16,7 +17,8 @@ class TripDashboardContainer extends Component {
 function mapStateToProps(state) {
 	return {
 		isTripRunning: state.rpmMeter.isTripRunning,
-		tripData: state.tripDashboard,
+		isMoving: state.tripDashboard.isMoving,
+		currentTrip: getCurrentTrip(state.tripDashboard.trips),
 		user: state.user,
 		resistanceInput: state.resistanceInput
 	};

@@ -11,3 +11,17 @@ export function createResistanceRecordId(resistanceRecords) {
 export function getLastResistanceRecord(resistanceRecords) {
 	return resistanceRecords[resistanceRecords.length - 1];
 }
+
+export function createTripId(trips) {
+	if (trips.length === 0) {
+		return 1;
+	}
+
+	let lastTripId = trips[trips.length - 1].id;
+
+	return lastTripId + 1;
+}
+
+export function getCurrentTrip(trips = []) {
+	return trips[trips.length - 1];
+}

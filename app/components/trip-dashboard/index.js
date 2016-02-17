@@ -6,7 +6,7 @@ import ResistanceInput from '../resistance-input';
 
 export default class TripDashboard extends Component {
 	renderMeters() {
-		const { tripData, user, changeResistanceLevel } = this.props;
+		const { currentTrip, user, changeResistanceLevel } = this.props;
 
 		const userFormat = user.dashboardFormat;
 		const resistanceLevels = user.resistanceLevels;
@@ -15,27 +15,27 @@ export default class TripDashboard extends Component {
 			<div>
 				<NumberUnit
 					title="speed"
-					quantity={tripData.speedQty}
+					quantity={currentTrip.speedQty}
 					format={userFormat.speed}
 				/>
 				<NumberUnit
 					title="average speed"
-					quantity={tripData.avgSpeedQty}
+					quantity={currentTrip.avgSpeedQty}
 					format={userFormat.avgSpeed}
 				/>
 				<NumberUnit
 					title="distance"
-					quantity={tripData.distanceQty}
+					quantity={currentTrip.distanceQty}
 				    format={userFormat.distance}
 				/>
 				<TimeInterval
 					title="moving time"
-					quantity={tripData.movingTimeQty}
+					quantity={currentTrip.movingTimeQty}
 				    format={userFormat.time}
 				/>
 				<TimeInterval
 					title="total time"
-					quantity={tripData.totalTimeQty}
+					quantity={currentTrip.totalTimeQty}
 					format={userFormat.time}
 					/>
 
@@ -46,7 +46,7 @@ export default class TripDashboard extends Component {
 
 	render() {
 
-		const { startTrip, stopTrip, isTripRunning, tripData } = this.props;
+		const { startTrip, stopTrip, isTripRunning, isMoving } = this.props;
 
 		return (
 			<div className={styles.dashboard}>
@@ -54,7 +54,7 @@ export default class TripDashboard extends Component {
 				<button onClick={startTrip}>Start Trip</button>
 				<button onClick={stopTrip}>Stop Trip</button>
 				{isTripRunning ? this.renderMeters() : null}
-				{tripData.isMoving ? 'moving' : 'not moving'}
+				{isMoving ? 'moving' : 'not moving'}
 			</div>
 		)
 	}
