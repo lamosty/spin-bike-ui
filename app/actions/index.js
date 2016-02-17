@@ -13,12 +13,18 @@ export function startTrip() {
 
 		return rpmMeter.start()
 			.then(stopFunction => {
+
+				// Start trip clock for calculating total elapsed time.
 				const tripClock = startTripClock(() => {
+
+					// 1. Dispatch tick action each second (clock interval is 1s).
 					dispatch(tickTripClockAction());
 				});
 
+				// 2. Dispatch action that trip was started.
 				dispatch(startTripAction(rpmMeter, stopFunction, tripClock));
 
+				// Listen to RPMMeter "pulses" (revolutions of pedals on spin bike).
 				rpmMeter.on(PULSE_EVENT, pulseData => {
 					const state = getState();
 
@@ -27,10 +33,14 @@ export function startTrip() {
 					clearTimeout(movingThresholdTimeout);
 
 					movingThresholdTimeout = setTimeout(() => {
-						dispatch(stopMovingAction());
 
+						// 3. Dispatch a stop moving action if cyclist hasn't made a revolution of pedals on his/her
+						// bike in the last 2 seconds.
+						dispatch(stopMovingAction());
 					}, 2000);
 
+					// 4. Dispatch action that a full revolution of pedals on stationary bike was made.
+					// Include secondsBetweenPulses (= revolutions) in pulseData object.
 					dispatch(getTripDataAction(pulseData, movingThresholdTimeout));
 				});
 			});
