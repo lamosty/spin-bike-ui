@@ -10,10 +10,12 @@ export default class ResistanceInput extends Component {
 	}
 
 	render() {
+		const { changeResistanceLevel } = this.props;
+
 		return (
 			<div>
 				Resistance level
-				<select>
+				<select onChange={(event) => changeResistanceLevel(parseInt(event.target.value))}>
 					{this.renderLevels()}
 				</select>
 			</div>

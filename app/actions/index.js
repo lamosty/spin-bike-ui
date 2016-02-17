@@ -6,6 +6,7 @@ export const STOP_TRIP = 'STOP_TRIP';
 export const GET_TRIP_DATA = 'GET_TRIP_DATA';
 export const TICK_TRIP_CLOCK = 'TICK_TRIP_CLOCK';
 export const STOP_MOVING = 'STOP_MOVING';
+export const CHANGE_RESISTANCE_LEVEL = 'CHANGE_RESISTANCE_LEVEL';
 
 export function startTrip() {
 	return function(dispatch, getState) {
@@ -56,6 +57,15 @@ export function stopTrip() {
 		stopFunction();
 		tripClock.stop();
 		dispatch(stopTripAction());
+	}
+}
+
+export function changeResistanceLevel(newLevelId) {
+	return {
+		type: CHANGE_RESISTANCE_LEVEL,
+		payload: {
+			levelId: newLevelId
+		}
 	}
 }
 

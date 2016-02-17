@@ -6,7 +6,7 @@ import ResistanceInput from '../resistance-input';
 
 export default class TripDashboard extends Component {
 	renderMeters() {
-		const { tripData, user } = this.props;
+		const { tripData, user, changeResistanceLevel } = this.props;
 
 		const userFormat = user.dashboardFormat;
 		const resistanceLevels = user.resistanceLevels;
@@ -39,7 +39,7 @@ export default class TripDashboard extends Component {
 					format={userFormat.time}
 					/>
 
-				<ResistanceInput levels={resistanceLevels} />
+				<ResistanceInput levels={resistanceLevels} changeResistanceLevel={changeResistanceLevel} />
 			</div>
 		);
 	}
