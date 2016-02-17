@@ -1,6 +1,7 @@
 import * as actionTypes from '../actions';
 import merge from 'lodash.merge';
 import { createResistanceRecordId, getLastResistanceRecord } from '../utils/reducers-helpers';
+import * as calculate from '../utils/trip-calculators';
 
 export function resistanceInput(state = {}, action) {
 	const { resistanceRecords = [] } = state;
@@ -17,6 +18,26 @@ export function resistanceInput(state = {}, action) {
 
 			return merge( {}, state, {
 				resistanceRecords: [ ...resistanceRecords, newResistanceRecord ]
+			} );
+		}
+
+		case actionTypes.GET_TRIP_DATA: {
+			let lastResistanceRecord = getLastResistanceRecord( resistanceRecords );
+
+			// TODO: get this from user profile. Meanwhile, use @lamosty's bike.
+			const wheelDiameter = 6.6; //in meters
+
+			let { secondsBetweenPulses } = action.payload.pulseData;
+
+			lastResistanceRecord = merge( lastResistanceRecord, {
+				movingTimeQty: calculate.movingTime( secondsBetweenPulses, lastResistanceRecord.movingTimeQty ),
+				distanceQty: calculate.distance( wheelDiameter, lastResistanceRecord.distanceQty )
+			} );
+
+			lastResistanceRecord.avgSpeedQty = calculate.avgSpeed( lastResistanceRecord.distanceQty, lastResistanceRecord.movingTimeQty );
+
+			return merge( {}, state, {
+				resistanceRecords: [ ...resistanceRecords ]
 			} );
 		}
 
