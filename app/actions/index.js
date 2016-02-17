@@ -1,5 +1,6 @@
 import RpmMeter, { PULSE_EVENT } from 'spin-bike-rpm-meter';
 import { startTripClock } from '../utils/action-helpers';
+import moment from 'moment';
 
 export const START_TRIP = 'START_TRIP';
 export const STOP_TRIP = 'STOP_TRIP';
@@ -23,7 +24,12 @@ export function startTrip() {
 				});
 
 				// 2. Dispatch action that trip was started.
-				dispatch(startTripAction(rpmMeter, stopFunction, tripClock));
+				dispatch(startTripAction(
+					rpmMeter,
+					stopFunction,
+					tripClock,
+					moment().unix()
+				));
 
 				// Listen to RPMMeter "pulses" (revolutions of pedals on spin bike).
 				rpmMeter.on(PULSE_EVENT, pulseData => {
@@ -56,15 +62,21 @@ export function stopTrip() {
 
 		stopFunction();
 		tripClock.stop();
-		dispatch(stopTripAction());
+		dispatch(stopTripAction(
+			moment().unix()
+		));
 	}
 }
 
 export function changeResistanceLevel(newLevelId) {
+	let time = moment().unix();
+
 	return {
 		type: CHANGE_RESISTANCE_LEVEL,
 		payload: {
-			levelId: newLevelId
+			levelId: newLevelId,
+			time: time
+
 		}
 	}
 }
@@ -94,19 +106,23 @@ function getTripDataAction(pulseData, movingThresholdTimeout) {
 	};
 }
 
-function startTripAction(rpmMeter, stopFunction, tripClock) {
+function startTripAction(rpmMeter, stopFunction, tripClock, startTime) {
 	return {
 		type: START_TRIP,
 		payload: {
 			rpmMeter,
 			stopFunction,
-			tripClock
+			tripClock,
+			startTime
 		}
 	};
 }
 
-function stopTripAction() {
+function stopTripAction(stopTime) {
 	return {
-		type: STOP_TRIP
+		type: STOP_TRIP,
+		payload: {
+			stopTime
+		}
 	}
 }

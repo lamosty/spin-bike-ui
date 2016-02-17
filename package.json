@@ -51,6 +51,7 @@
     "express": "^4.13.4",
     "js-quantities": "^1.6.0",
     "lodash.merge": "^4.2.0",
+    "moment": "^2.11.2",
     "numeral": "^1.5.3",
     "react": "^0.14.7",
     "react-dom": "^0.14.7",
