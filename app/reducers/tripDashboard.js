@@ -4,7 +4,18 @@ import { createTripId, getCurrentTrip } from '../utils/reducers-helpers';
 import merge from 'lodash.merge';
 import Qty from 'js-quantities';
 
-export function tripDashboard(state = {}, action) {
+const defaultState = {
+	speedQty: null,
+	movingTimeQty: null,
+	distanceQty: null,
+	avgSpeedQty: null,
+	totalTimeQty: null,
+	isMoving: false,
+	trips: [],
+	movingThresholdTimeout: null
+};
+
+export function tripDashboard(state = defaultState, action) {
 	const { trips = [] } = state;
 
 	switch(action.type) {
