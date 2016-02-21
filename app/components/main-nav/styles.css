@@ -1,0 +1,7 @@
+.main-nav.navbar-inverse .navbar-nav>li>a, .main-nav.navbar-inverse .navbar-brand {
+    color: #ecf0f1;
+}
+
+.main-nav.navbar-inverse .navbar-nav>li>a:hover, .main-nav.navbar-inverse .navbar-brand:hover {
+    color: #fff;
+}
