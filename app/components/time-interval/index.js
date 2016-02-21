@@ -3,26 +3,24 @@ import Numeral from 'numeral';
 
 export default class TimeInterval extends Component {
 	renderQuantity(quantity, format) {
-		if (typeof quantity === 'undefined') {
+		if (quantity == null) {
 			return (
-				<div>-|-</div>
+				<span className="number"><p>-|-</p></span>
 			);
 		}
 
 		const seconds = quantity.to('s').scalar;
 
-		return <span>{Numeral(seconds).format(format)}</span>;
+		return <span className="number"><p>{Numeral(seconds).format(format)}</p></span>;
 	}
 
 	render() {
-		const { title, quantity, format } = this.props;
+		const { title, quantity, format, className } = this.props;
 
 		return (
-			<div>
-				<div>{title}</div>
-				<div>
-					{this.renderQuantity(quantity, format)}
-				</div>
+			<div className={className}>
+				<h3>{title}</h3>
+				{this.renderQuantity(quantity, format)}
 			</div>
 		);
 	}

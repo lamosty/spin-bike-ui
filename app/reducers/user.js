@@ -1,6 +1,12 @@
 import * as actionTypes from '../actions';
 
-export function user(state = {}, action) {
+export function user(
+	state = {
+		dashboardFormat: {},
+		resistanceLevels: []
+	},
+	action
+) {
 
 	// TODO: add a real user auth
 	switch(action.type) {

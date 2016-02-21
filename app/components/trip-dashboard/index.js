@@ -13,49 +13,98 @@ export default class TripDashboard extends Component {
 
 		return (
 			<div>
-				<NumberUnit
-					title="speed"
-					quantity={currentTrip.speedQty}
-					format={userFormat.speed}
-				/>
-				<NumberUnit
-					title="average speed"
-					quantity={currentTrip.avgSpeedQty}
-					format={userFormat.avgSpeed}
-				/>
-				<NumberUnit
-					title="distance"
-					quantity={currentTrip.distanceQty}
-				    format={userFormat.distance}
-				/>
-				<TimeInterval
-					title="moving time"
-					quantity={currentTrip.movingTimeQty}
-				    format={userFormat.time}
-				/>
-				<TimeInterval
-					title="total time"
-					quantity={currentTrip.totalTimeQty}
-					format={userFormat.time}
+				<div className="row">
+					<NumberUnit
+						title="distance"
+						quantity={currentTrip.distanceQty}
+						format={userFormat.distance}
+						className="col-md-2 parameter"
 					/>
 
-				<ResistanceInput levels={resistanceLevels} changeResistanceLevel={changeResistanceLevel} />
+					<NumberUnit
+						title="speed"
+						quantity={currentTrip.speedQty}
+						format={userFormat.speed}
+						className="col-md-8 speed"
+					/>
+
+					<TimeInterval
+						title="moving time"
+						quantity={currentTrip.movingTimeQty}
+						format={userFormat.time}
+						className="col-md-2 parameter"
+					/>
+				</div>
+
+				<div className="row">
+					<NumberUnit
+						title="average speed"
+						quantity={currentTrip.avgSpeedQty}
+						format={userFormat.avgSpeed}
+					    className="col-md-2 parameter"
+					/>
+
+					<ResistanceInput
+						levels={resistanceLevels}
+						changeResistanceLevel={changeResistanceLevel}
+					    className="col-md-8"
+					/>
+
+					<TimeInterval
+						title="total time"
+						quantity={currentTrip.totalTimeQty}
+						format={userFormat.time}
+					    className="col-md-2 parameter"
+					/>
+				</div>
 			</div>
 		);
 	}
 
-	render() {
-
-		const { startTrip, stopTrip, isTripRunning, isMoving } = this.props;
+	renderStartBtn() {
+		const { startTrip } = this.props;
 
 		return (
-			<div className={styles.dashboard}>
-				TripDashboard
-				<button onClick={startTrip}>Start Trip</button>
-				<button onClick={stopTrip}>Stop Trip</button>
-				{isTripRunning ? this.renderMeters() : null}
-				{isMoving ? 'moving' : 'not moving'}
-			</div>
+			<button
+				onClick={startTrip}
+				className="btn btn-primary btn-block start-stop-btn"
+			>
+				Start trip
+			</button>
+		);
+	}
+
+	renderStopBtn() {
+		const { stopTrip } = this.props;
+
+		return (
+			<button
+				onClick={stopTrip}
+				className="btn btn-primary btn-block start-stop-btn"
+			>
+				Stop trip
+			</button>
+		);
+	}
+
+	render() {
+		const { isTripRunning } = this.props;
+
+		let button = this.renderStartBtn();
+
+		if (isTripRunning) {
+			button = this.renderStopBtn();
+		}
+
+		return (
+			<section className="trip-info">
+				{this.renderMeters()}
+				<div className="row">
+					<div className="col-md-2"></div>
+					<div className="col-md-8">{button}</div>
+					<div className="col-md-2"></div>
+				</div>
+			</section>
 		)
 	}
 }

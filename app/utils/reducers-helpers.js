@@ -22,6 +22,12 @@ export function createTripId(trips) {
 	return lastTripId + 1;
 }
 
-export function getCurrentTrip(trips = []) {
+export function getCurrentTrip(trips = [{
+	speedQty: null,
+	distanceQty: null,
+	avgSpeedQty: null,
+	totalTimeQty: null,
+	movingTimeQty: null
+}]) {
 	return trips[trips.length - 1];
 }

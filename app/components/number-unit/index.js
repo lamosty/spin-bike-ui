@@ -2,29 +2,27 @@ import React, { Component } from 'react';
 
 export default class NumberUnit extends Component {
 	renderQuantity(quantity, format) {
-		if (typeof quantity === 'undefined') {
+		if (quantity == null) {
 			return (
-				<div>-|-</div>
+				<span className="number"><p>-|-</p></span>
 			);
 		}
 
 		const formattedQuantity = quantity.to(format).toPrec(0.01);
 
 		return [
-			<span key="value">{formattedQuantity.scalar}</span>,
-			<span key="unit">{formattedQuantity.units()}</span>
+			<span className="number" key="value"><p>{formattedQuantity.scalar}</p></span>,
+			<span className="unit" key="unit"><p>{formattedQuantity.units()}</p></span>
 		];
 	}
 
 	render() {
-		const { title, quantity, format } = this.props;
+		const { title, quantity, format, className } = this.props;
 
 		return (
-			<div>
-				<div>{title}</div>
-				<div>
-					{this.renderQuantity(quantity, format)}
-				</div>
+			<div className={className}>
+				<h3>{title}</h3>
+				{this.renderQuantity(quantity, format)}
 			</div>
 		);
 	}
