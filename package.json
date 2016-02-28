@@ -55,6 +55,7 @@
   "dependencies": {
     "babel-polyfill": "^6.3.14",
     "bootstrap-sass": "^3.3.6",
+    "classnames": "^2.2.3",
     "express": "^4.13.4",
     "js-quantities": "^1.6.0",
     "lodash.merge": "^4.2.0",
