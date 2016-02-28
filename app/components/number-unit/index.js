@@ -1,27 +1,36 @@
 import React, { Component } from 'react';
+import classNames from 'classnames';
 
 export default class NumberUnit extends Component {
 	renderQuantity(quantity, format) {
 		if (quantity == null) {
 			return (
-				<span className="number"><p>-|-</p></span>
+				<div>
+					<span className="number-unit_number">-|-</span>
+				</div>
 			);
 		}
 
 		const formattedQuantity = quantity.to(format).toPrec(0.01);
 
-		return [
-			<span className="number" key="value"><p>{formattedQuantity.scalar}</p></span>,
-			<span className="unit" key="unit"><p>{formattedQuantity.units()}</p></span>
-		];
+		return (
+			<div>
+				<div className="number-unit__number">{formattedQuantity.scalar}</div>
+				<div className="number-unit__unit">{formattedQuantity.units()}</div>
+			</div>
+		);
 	}
 
 	render() {
-		const { title, quantity, format, className } = this.props;
+		const { title, quantity, format, className = '', isLarge = false } = this.props;
+
+		let classes = classNames('number-unit', className, {
+			'is-large': isLarge
+		});
 
 		return (
-			<div className={className}>
-				<h3>{title}</h3>
+			<div className={classes}>
+				<h3 className="number-unit__title">{title}</h3>
 				{this.renderQuantity(quantity, format)}
 			</div>
 		);

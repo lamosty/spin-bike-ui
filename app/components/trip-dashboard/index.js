@@ -18,14 +18,15 @@ export default class TripDashboard extends Component {
 						title="distance"
 						quantity={currentTrip.distanceQty}
 						format={userFormat.distance}
-						className="col-md-2 parameter"
+						className="col-md-2"
 					/>
 
 					<NumberUnit
 						title="speed"
 						quantity={currentTrip.speedQty}
 						format={userFormat.speed}
-						className="col-md-8 speed"
+						className="col-md-8"
+						isLarge={true}
 					/>
 
 					<TimeInterval
@@ -41,7 +42,7 @@ export default class TripDashboard extends Component {
 						title="average speed"
 						quantity={currentTrip.avgSpeedQty}
 						format={userFormat.avgSpeed}
-					    className="col-md-2 parameter"
+					    className="col-md-2"
 					/>
 
 					<ResistanceInput
