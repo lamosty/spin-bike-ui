@@ -6,7 +6,7 @@ export default class NumberUnit extends Component {
 		if (quantity == null) {
 			return (
 				<div>
-					<span className="number-unit_number">-|-</span>
+					<div className="number-unit__number">-|-</div>
 				</div>
 			);
 		}

@@ -32,7 +32,7 @@ export default class TripDashboard extends Component {
 						title="moving time"
 						quantity={currentTrip.movingTimeQty}
 						format={userFormat.time}
-						className="col-md-2 parameter"
+						className="col-md-2"
 					/>
 				</div>
 
@@ -54,7 +54,7 @@ export default class TripDashboard extends Component {
 						title="total time"
 						quantity={currentTrip.totalTimeQty}
 						format={userFormat.time}
-					    className="col-md-2 parameter"
+					    className="col-md-2"
 					/>
 				</div>
 			</div>
