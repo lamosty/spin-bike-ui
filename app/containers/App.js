@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import MainNav from '../components/main-nav';
 import 'bootstrap-loader';
-import '../assets/global-styles.css';
+import '../assets/style.scss';
 
 export default class App extends Component {
 	constructor(props) {

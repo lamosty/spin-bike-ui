@@ -39,10 +39,15 @@ module.exports = {
 			loader: 'style!css'
 		}, {
 			test: /\.scss$/,
-			loaders: [ 'style', 'css', 'postcss', 'sass' ]
+			loaders: [ 'style', 'css', 'sass' ]
 		}, {
 			test: /\.(woff2?|ttf|eot|svg)$/,
 			loader: 'url?limit=10000'
 		}]
+	},
+	sassLoader: {
+		includePaths: [
+			path.join(__dirname, 'app')
+		]
 	}
 };

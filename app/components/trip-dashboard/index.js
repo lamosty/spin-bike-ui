@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import styles from './style.css';
 import NumberUnit from '../number-unit';
 import TimeInterval from '../time-interval';
 import ResistanceInput from '../resistance-input';
