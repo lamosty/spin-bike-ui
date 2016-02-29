@@ -1,4 +1,4 @@
-.trip-info {
+.dashboard {
     background-color: #ecf0f1;
     padding: 30px;
     margin: 0 auto;
@@ -7,46 +7,4 @@
 .start-stop-btn {
     background-color: #2980b9;
     font-size: 40px
-}
-
-.speed h3 {
-    font-size: 140%;
-    font-weight: bold;
-}
-
-.trip-info .speed .number p {
-    font-size: 420%;
-    padding: 0.25em;
-}
-
-.trip-info div .number {
-    color: #e74c3c;
-    font-weight: bold;
-}
-
-.trip-info figure select {
-    width:50px;
-    font-size: 30px;
-}
-
-.trip-info figure figcaption {
-    font-weight: bold;
-}
-
-.parameter {
-    font-size: 120%;
-}
-
-.parameter .number {
-    font-size: 150%
-
-}
-
-.parameter h3 {
-    font-size: 90%;
-    font-weight: bold;
-}
-
-.speed .unit {
-    font-size: 130%;
 }

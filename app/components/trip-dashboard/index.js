@@ -97,7 +97,7 @@ export default class TripDashboard extends Component {
 		}
 
 		return (
-			<section className="trip-info">
+			<section className="dashboard">
 				{this.renderMeters()}
 				<div className="row">
 					<div className="col-md-2"></div>
