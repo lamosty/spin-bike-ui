@@ -4,7 +4,6 @@ import { browserHistory } from 'react-router';
 import thunk from 'redux-thunk';
 import rootReducer from '../reducers';
 import createLogger from 'redux-logger';
-import DevTools from '../containers/DevTools';
 import * as actionTypes from '../actions';
 
 const reduxRouterMiddleware = syncHistory(browserHistory);
@@ -32,7 +31,7 @@ export default function configureStore(initialState) {
 		initialState,
 		compose(
 			applyMiddleware(thunk, reduxRouterMiddleware, createLogger(reduxLoggerOptions)),
-			DevTools.instrument()
+			window.devToolsExtension ? window.devToolsExtension() : f => f
 		)
 	);
 
