@@ -44,10 +44,18 @@ module.exports = {
 			loader: 'json'
 		}, {
 			test: /\.css$/,
-			loader: ExtractTextPlugin.extract('style', 'css?modules&localIdentName=[name]---[local]---[hash:base64:5]!postcss')
+			loader: 'style!css'
+		}, {
+			test: /\.scss$/,
+			loaders: [ 'style', 'css', 'sass' ]
+		}, {
+			test: /\.(woff2?|ttf|eot|svg)$/,
+			loader: 'url?limit=10000'
 		}]
 	},
-	postcss: [
-		require('autoprefixer')
-	]
+	sassLoader: {
+		includePaths: [
+			path.join(__dirname, 'app')
+		]
+	}
 };
