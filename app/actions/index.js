@@ -8,6 +8,7 @@ export const GET_TRIP_DATA = 'GET_TRIP_DATA';
 export const TICK_TRIP_CLOCK = 'TICK_TRIP_CLOCK';
 export const STOP_MOVING = 'STOP_MOVING';
 export const CHANGE_RESISTANCE_LEVEL = 'CHANGE_RESISTANCE_LEVEL';
+export const START_TRIP_ERROR = 'START_TRIP_ERROR';
 
 export function startTrip() {
 	return function(dispatch, getState) {
@@ -50,6 +51,8 @@ export function startTrip() {
 					// Include secondsBetweenPulses (= revolutions) in pulseData object.
 					dispatch(getTripDataAction(pulseData, movingThresholdTimeout));
 				});
+			}).catch(() => {
+				dispatch(startTripErrorAction());
 			});
 	}
 }
@@ -77,6 +80,15 @@ export function changeResistanceLevel(newLevelId) {
 			levelId: newLevelId,
 			time: time
 
+		}
+	}
+}
+
+function startTripErrorAction() {
+	return {
+		type: START_TRIP_ERROR,
+		payload: {
+			startTripError: true
 		}
 	}
 }

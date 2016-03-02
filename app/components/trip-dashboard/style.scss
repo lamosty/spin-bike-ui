@@ -1,7 +1,11 @@
-.dashboard {
+.trip-dashboard {
     background-color: #ecf0f1;
     padding: 30px;
     margin: 0 auto;
+}
+
+.trip-dashboard__start-trip-error {
+    color: red;
 }
 
 .start-stop-btn {

@@ -14,7 +14,12 @@ export function rpmMeter(state = {}, action) {
 		case actionTypes.STOP_TRIP:
 			return {
 				isTripRunning: false
-			}
+			};
+
+		case actionTypes.START_TRIP_ERROR:
+			return {
+				startTripError: true
+			};
 	}
 
 	return state;

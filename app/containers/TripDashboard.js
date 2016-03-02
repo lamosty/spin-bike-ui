@@ -17,6 +17,7 @@ class TripDashboardContainer extends Component {
 function mapStateToProps(state) {
 	return {
 		isTripRunning: state.rpmMeter.isTripRunning,
+		startTripError: state.rpmMeter.startTripError,
 		currentTrip: getCurrentTrip(state.tripDashboard.trips),
 		user: state.user,
 		resistanceInput: state.resistanceInput

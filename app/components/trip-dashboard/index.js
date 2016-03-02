@@ -61,6 +61,15 @@ export default class TripDashboard extends Component {
 		);
 	}
 
+	renderStartTripError() {
+		return (
+			<h3 className="trip-dashboard__start-trip-error">
+				Sorry, but we can't start tracking your trip. Please make sure the cable from your spin bike
+				is properly inserted in your computer's microphone slot. Click here for more help
+			</h3>
+		);
+	}
+
 	renderStartBtn() {
 		const { startTrip } = this.props;
 
@@ -96,8 +105,11 @@ export default class TripDashboard extends Component {
 			button = this.renderStopBtn();
 		}
 
+		const { startTripError = false } = this.props;
+
 		return (
-			<section className="dashboard">
+			<section className="trip-dashboard">
+				{startTripError ? this.renderStartTripError() : null}
 				{this.renderMeters()}
 				<div className="row">
 					<div className="col-md-2"></div>
